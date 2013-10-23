@@ -17,12 +17,26 @@ exports = Class(GC.Application, function () {
 	};
 
 	this.initTerrain = function () {
+		var box;
 		var xi = 0;
         var yi = 0;
-
         while(xi <= this.deviceWidth) {
-        	while(yi <= this.deviceHeight)  {
-        		var box = new Box({superview: this.view, x: xi, y: yi});
+        	while(yi <= this.deviceHeight) {
+        		if(yi === 0) {
+        			box = new Box({
+        				superview: this.view, 
+        				x: xi, 
+        				y: yi,
+        				image: "resources/images/grassOnTopSoil.jpg"
+        			});
+        		} else {
+        			box = new Box({
+        				superview: this.view, 
+        				x: xi, 
+        				y: yi,
+        				image: "resources/images/simpleSoil.jpg"
+        			});
+        		}
         		this.terrain.push(box);
         		yi += 50;
         	}
