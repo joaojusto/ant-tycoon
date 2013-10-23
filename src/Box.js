@@ -1,11 +1,12 @@
-import ui.View as View;
+import ui.ImageView as ImageView;
 
-exports = new Class(View, function(supr){
+exports = new Class(ImageView, function(supr){
 	this.init = function(opts) {
 		var boxOptions = {
 			width: 50,
 			height: 50,
-			backgroundColor: "#008800"
+			image: "resources/images/simpleSoil.jpg",
+			zIndex: 0
 		};
 		supr(this, "init", [merge(opts, boxOptions)]);
 	};
