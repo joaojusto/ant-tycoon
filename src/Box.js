@@ -5,7 +5,6 @@ exports = new Class(ImageView, function(supr){
 		var boxOptions = {
 			width: 50,
 			height: 50,
-			image: "resources/images/simpleSoil.jpg",
 			zIndex: 0
 		};
 		supr(this, "init", [merge(opts, boxOptions)]);
