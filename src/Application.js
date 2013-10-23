@@ -1,24 +1,35 @@
 //devkit imports
 import device;
-import ui.TextView as TextView;
 
 //our imports;
-import .Terrain as Terrain;
+import .Box as Box;
 
 exports = Class(GC.Application, function () {
 
+	this.terrain = [];
+
+	this.deviceWidth = device.screen.width;
+    this.deviceHeight = device.screen.height;
+
 	this.initUI = function () {
-		var textview = new TextView({
-			superview: this.view,
-			layout: "box",
-			text: device.width + "x" + device.height,
-			color: "white"
-		});
+		
+		this.initTerrain();
 	};
 
 	this.initTerrain = function () {
-		Terrain.init();
+		var xi = 0;
+        var yi = 0;
+
+        while(xi <= this.deviceWidth) {
+        	while(yi <= this.deviceHeight)  {
+        		var box = new Box({superview: this.view, x: xi, y: yi});
+        		this.terrain.push(box);
+        		yi += 50;
+        	}
+        	yi = 0;
+        	xi += 50;
+        }
 	};
-	
+
 	this.launchUI = function () {};
 });
