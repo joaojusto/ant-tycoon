@@ -3,13 +3,12 @@
 	"shortName": "ant-tycoon",
 	"title": "Ant Tycoon",
 	"studio": {
-		"name": "Última Ideia",
-		"domain": "com.ultimaideia.ant-tycoon",
-		"stagingDomain": "com.ultimaideia.ant-tycoon"
+		"name": "Ant Tycoon",
+		"domain": "com.ultimaideia.antTycoon",
+		"stagingDomain": "com.ultimaideia.antTycoon"
 	},
 	"supportedOrientations": [
-		"portrait"
-		"landscape"
+		"portrait, landscape"
 	],
 	"description": "",
 	"icon": "resources/icons/icon512.png",
