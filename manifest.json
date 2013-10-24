@@ -1,14 +1,15 @@
 {
 	"appID": "309099f9aac540d096f347115cb4f235",
 	"shortName": "ant-tycoon",
-	"title": "ant-tycoon",
+	"title": "Ant Tycoon",
 	"studio": {
-		"name": "Example Studio Name",
-		"domain": "studio.example.com",
-		"stagingDomain": "staging.example.com"
+		"name": "Última Ideia",
+		"domain": "com.ultimaideia.ant-tycoon",
+		"stagingDomain": "com.ultimaideia.ant-tycoon"
 	},
 	"supportedOrientations": [
 		"portrait"
+		"landscape"
 	],
 	"description": "",
 	"icon": "resources/icons/icon512.png",
