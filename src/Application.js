@@ -19,12 +19,15 @@ exports = Class(GC.Application, function () {
 
     	this.upperLimit = this.deviceHeight/3;
 
+    	this.blocksSize = new Point(this.deviceWidth/6, this.deviceWidth/6);
+		
 		this.style.backgroundColor = " #82CAFF";
 
 		this.terrainMap = new Terrain({
 			x: 0,
 			y: this.upperLimit,
 			superview: this.view, 
+			blocksSize: this.blocksSize,
 			deviceWidth: this.deviceWidth,
 			deviceHeight: this.deviceHeight
 		});

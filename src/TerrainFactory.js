@@ -17,18 +17,21 @@ exports = new Class(View, function(supr){
 		this.deviceWidth = opts.deviceWidth;
     	this.deviceHeight = opts.deviceHeight;
 
+    	this.blocksSize = opts.blocksSize;
+
     	this.blockId = 0;
 	};
 
 	this.generateGrassBlocks = function (opts) {
-		var block = new Block();
+		var block;
 		var xi = opts.xi;
 		var xf = opts.xf;
 
-		for(x = xi; x <= xf; x += block.blockSize.x) {
+		for(x = xi; x <= xf; x += this.blocksSize.x) {
 			block = new Block({
 				y: 0,
 				x: x,
+				blocksSize: this.blocksSize,
 				superview: opts.terrainView,
 				image: "resources/images/grassOnTopSoil.png"
 			});
@@ -37,7 +40,7 @@ exports = new Class(View, function(supr){
 	};
 
 	this.initBlocks = function (superView) {
-		var block = new Block();
+		var block;
         var grassBlock = false;
 
         this.generateGrassBlocks({
@@ -46,12 +49,13 @@ exports = new Class(View, function(supr){
         	terrainView: superView
         });
 
-        for (xi = 0; xi <= this.deviceWidth; xi += block.blockSize.x) {
-        	for (yi = block.blockSize.y; yi <= this.deviceHeight; yi += block.blockSize.y) {
+        for (xi = 0; xi <= this.deviceWidth; xi += this.blocksSize.x) {
+        	for (yi = this.blocksSize.y; yi <= this.deviceHeight; yi += this.blocksSize.y) {
         		block = new Block({
         			x: xi,
         			y: yi,
         			superview: superView,
+        			blocksSize: this.blocksSize,
         			image: "resources/images/simpleSoil.jpg"
         		});
         		this.blocks.push(block);

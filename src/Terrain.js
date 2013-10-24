@@ -38,14 +38,17 @@ exports = new Class(View, function(supr){
 
 		this.terrainView.tick = function (dt) {
 			var view = GC.app.terrainMap.getTerrainView();
+			var factory = GC.app.terrainMap.getFactory();
 			var animator = GC.app.terrainMap.getAnimator();
-  			if(view.style.y > GC.app.upperLimit + 10) {
+  			
+  			if(view.style.y > GC.app.upperLimit) {
 				animate(view).now({y: GC.app.upperLimit});
 			}
 		};
 
 		this.factory = new TerrainFactory({
 			superview: this.terrainView,
+			blocksSize: opts.blocksSize,
 			deviceWidth: opts.deviceWidth,
 			deviceHeight: opts.deviceHeight,
 			terrainView: this.terrainView
@@ -62,15 +65,15 @@ exports = new Class(View, function(supr){
 		return this.terrain;
 	};
 
+	this.getFactory = function () {
+		return this.factory;
+	};
+
 	this.getAnimator = function () {
 		return this.animator;
 	};
 
 	this.getTerrainView = function () {
 		return this.terrainView;
-	};
-
-	this.getTerrainFactory = function () {
-		return this.factory;
 	};
 });
