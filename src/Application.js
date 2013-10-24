@@ -1,6 +1,5 @@
 //devkit imports
 import device;
-import animate;
 import math.geom.Point as Point;
 
 //our imports;
