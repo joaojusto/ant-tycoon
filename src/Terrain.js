@@ -36,6 +36,16 @@ exports = new Class(View, function(supr){
 			animate(view).clear();
 		});
 
+		this.factory = new TerrainFactory({
+			superview: this.terrainView,
+			blocksSize: opts.blocksSize,
+			deviceWidth: opts.deviceWidth,
+			deviceHeight: opts.deviceHeight,
+			terrainView: this.terrainView
+		});
+
+		this.factory.initBlocks();
+
 		this.terrainView.tick = function (dt) {
 			var view = GC.app.terrainMap.getTerrainView();
 			var factory = GC.app.terrainMap.getFactory();
@@ -46,26 +56,14 @@ exports = new Class(View, function(supr){
 			}
 
 			if(view.style.x <= GC.app.blocksSize.x) {
-				console.log("gen left blocks");
 				factory.generateBlocksOnTheLeft({
-        			xi: -this.deviceWidth,
+        			xi: -GC.app.deviceWidth,
         			xf: 0,
         			yi: factory.blocksSize.y,
         			yf: factory.deviceHeight,
-        			terrainView: view
         		});
 			}
 		};
-
-		this.factory = new TerrainFactory({
-			superview: this.terrainView,
-			blocksSize: opts.blocksSize,
-			deviceWidth: opts.deviceWidth,
-			deviceHeight: opts.deviceHeight,
-			terrainView: this.terrainView
-		});
-
-		this.factory.initBlocks(this.terrainView);
 	};
 
 	this.clean = function () {
