@@ -1,6 +1,6 @@
 //devkit imports
 import ui.View as View;
-
+import event.input.drag as drag;
 //our imports
 import .TerrainFactory as TerrainFactory;
 
@@ -17,9 +17,14 @@ exports = new Class(View, function(supr){
             y: opts.y,
 			id: 'TerrainView',
             superview: opts.superview,
-            width: this.deviceWidth,
-            height: this.deviceHeight
+            width: opts.deviceWidth,
+            height: opts.deviceHeight
         });
+
+		drag.makeDraggable(this.terrainView, {
+			radius: 5,
+			unbound: true
+		});
 
 		this.factory = new TerrainFactory({
 			superview: this.terrainView,
