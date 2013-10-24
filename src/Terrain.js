@@ -44,6 +44,17 @@ exports = new Class(View, function(supr){
   			if(view.style.y > GC.app.upperLimit) {
 				animate(view).now({y: GC.app.upperLimit});
 			}
+
+			if(view.style.x <= GC.app.blocksSize.x) {
+				console.log("gen left blocks");
+				factory.generateBlocksOnTheLeft({
+        			xi: -this.deviceWidth,
+        			xf: 0,
+        			yi: factory.blocksSize.y,
+        			yf: factory.deviceHeight,
+        			terrainView: view
+        		});
+			}
 		};
 
 		this.factory = new TerrainFactory({

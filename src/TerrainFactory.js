@@ -22,6 +22,22 @@ exports = new Class(View, function(supr){
     	this.blockId = 0;
 	};
 
+	this.generateBlocksOnTheLeft = function (opts) {
+		console.log("gen left blocks!!!!");
+		var block;
+		var xi = opts.xi;
+		var xf = opts.xf;
+		var yi = opts.yi;
+		var yf = opts.yf;
+
+		this.generateGrassBlocks({
+        	xi: xi,
+        	xf: xf,
+        	terrainView: opts.terrainView
+        });
+
+	};
+
 	this.generateGrassBlocks = function (opts) {
 		var block;
 		var xi = opts.xi;
@@ -41,7 +57,6 @@ exports = new Class(View, function(supr){
 
 	this.initBlocks = function (superView) {
 		var block;
-        var grassBlock = false;
 
         this.generateGrassBlocks({
         	xi: 0,
@@ -49,18 +64,35 @@ exports = new Class(View, function(supr){
         	terrainView: superView
         });
 
-        for (xi = 0; xi <= this.deviceWidth; xi += this.blocksSize.x) {
-        	for (yi = this.blocksSize.y; yi <= this.deviceHeight; yi += this.blocksSize.y) {
+        this.generateBlocks({
+        	xi: 0,
+        	xf: this.deviceWidth,
+        	yi: this.blocksSize.y,
+        	yf: this.deviceHeight,
+        	terrainView: superView
+        });
+
+	};
+
+	this.generateBlocks = function (opts) {
+		var block;
+		var xi = opts.xi;
+		var xf = opts.xf;
+		var yi = opts.yi;
+		var yf = opts.yf;
+
+		for (x = xi; x <= xf; x += this.blocksSize.x) {
+        	for (y = yi; y <= yf; y += this.blocksSize.y) {
         		block = new Block({
-        			x: xi,
-        			y: yi,
-        			superview: superView,
+        			x: x,
+        			y: y,
+        			superview: opts.terrainView,
         			blocksSize: this.blocksSize,
         			image: "resources/images/simpleSoil.jpg"
         		});
         		this.blocks.push(block);
         	}
-        	yi = 0;
+        	y = 0;
         }
 	};
 
