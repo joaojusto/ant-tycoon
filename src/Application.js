@@ -3,46 +3,17 @@ import device;
 
 //our imports;
 import .Box as Box;
+import .Terrain as Terrain;
 
 exports = Class(GC.Application, function () {
 
-	this.terrain = [];
-
-	this.deviceWidth = device.screen.width;
-    this.deviceHeight = device.screen.height;
+	this.terrainMap;
 
 	this.initUI = function () {
 		
-		this.initTerrain();
-	};
+		this.style.backgroundColor = " #82CAFF";
 
-	this.initTerrain = function () {
-		var box;
-		var xi = 0;
-        var yi = 0;
-        while(xi <= this.deviceWidth) {
-        	while(yi <= this.deviceHeight) {
-        		if(yi === 0) {
-        			box = new Box({
-        				superview: this.view, 
-        				x: xi, 
-        				y: yi,
-        				image: "resources/images/grassOnTopSoil.jpg"
-        			});
-        		} else {
-        			box = new Box({
-        				superview: this.view, 
-        				x: xi, 
-        				y: yi,
-        				image: "resources/images/simpleSoil.jpg"
-        			});
-        		}
-        		this.terrain.push(box);
-        		yi += 50;
-        	}
-        	yi = 0;
-        	xi += 50;
-        }
+		this.terrainMap = new Terrain({superview: this.view});
 	};
 
 	this.launchUI = function () {};
