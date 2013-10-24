@@ -23,21 +23,26 @@ exports = new Class(View, function(supr){
             height: opts.deviceHeight
         });
 
+		this.animator = animate(this.terrainView);
+
 		drag.makeDraggable(this.terrainView, {
 			radius: 5,
 			unbound: true
 		});
 
+		this.terrainView.on('Drag', function (startEvt, dragEvt, delta) {
+  			var view = GC.app.terrainMap.getTerrainView();
+			var animator = GC.app.terrainMap.getAnimator();
+			animate(view).clear();
+		});
+
 		this.terrainView.tick = function (dt) {
-  			if(GC.app.terrainMap.terrainView.style.y > GC.app.upperLimit) {
-				var animator = animate(GC.app.terrainMap.terrainView);
-				animate(GC.app.terrainMap.terrainView).now({y: GC.app.upperLimit});
+			var view = GC.app.terrainMap.getTerrainView();
+			var animator = GC.app.terrainMap.getAnimator();
+  			if(view.style.y > GC.app.upperLimit + 10) {
+				animate(view).now({y: GC.app.upperLimit});
 			}
 		};
-
-		this.terrainView.on('Drag', function (startEvt, dragEvt, delta) {
-  			console.log("x:", GC.app.terrainMap.terrainView.style.x, ", y:", GC.app.terrainMap.terrainView.style.y);
-		});
 
 		this.factory = new TerrainFactory({
 			superview: this.terrainView,
@@ -49,15 +54,23 @@ exports = new Class(View, function(supr){
 		this.factory.initBlocks(this.terrainView);
 	};
 
+	this.clean = function () {
+		this.removeFromSuperView();
+	};
+
 	this.getTerrain = function () {
 		return this.terrain;
+	};
+
+	this.getAnimator = function () {
+		return this.animator;
 	};
 
 	this.getTerrainView = function () {
 		return this.terrainView;
 	};
 
-	this.clean = function () {
-		this.removeFromSuperView();
+	this.getTerrainFactory = function () {
+		return this.factory;
 	};
 });
