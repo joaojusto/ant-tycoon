@@ -26,6 +26,7 @@ exports = new Class(View, function(supr){
 
 	this.generateBlocksOnTheLeft = function (opts) {
 		this.generateGrassBlocks(opts);
+		this.generateBlocks(opts);
 	};
 
 	this.generateGrassBlocks = function (opts) {
