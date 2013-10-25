@@ -18,6 +18,9 @@ exports = new Class(View, function(supr){
 		this.blocks = [];
 		this.viewBlocks = [];
 
+		this.viewBlocksWidth = 0;
+		this.viewBlocksHeight = 0;
+
 		this.deviceWidth = opts.deviceWidth;
     	this.deviceHeight = opts.deviceHeight;
 
@@ -36,9 +39,11 @@ exports = new Class(View, function(supr){
         	yf: this.deviceHeight,
         });
         this.adjustSuperViewSize();
+        this.generateBlocksOnTheLeft();
+        this.generateBlocksOnTheRight();
 	};
 
-	this.generateBlocksOnTheLeft = function (opts) {
+	this.generateBlocksOnTheLeft = function () {
 		console.log("gen left, ");
 		this.generateBlocks({
         	viewX: 0,
@@ -147,12 +152,14 @@ exports = new Class(View, function(supr){
 		};
 		view.updateOpts(opts)
 		this.viewBlocks.push(view);
-				var textview = new TextView({
+		var textview = new TextView({
       		superview: view,
       		layout: "box",
       		text: 'block:' + this.blockId,
       		color: "white"
     	});
+    	this.viewBlocksWidth = width;
+    	this.viewBlocksHeight = height;
 	};
 
 	this.clean = function () {

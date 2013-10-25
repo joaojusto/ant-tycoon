@@ -30,27 +30,21 @@ exports = new Class(View, function(supr){
 			unbound: true
 		});
 
-		this.terrainView.on('Drag', function (startEvt, dragEvt, delta) {
-  			var view = GC.app.terrainMap.getTerrainView();
-			var animator = GC.app.terrainMap.getAnimator();
-			animate(view).clear();
-			//console.log("pos: x= ", view.style.x, " y= ", view.style.y);
-		});
-
 		this.terrainView.on('DragStop', function (dragEvent, selectEvent) {
   			var view = GC.app.terrainMap.getTerrainView();
   			var factory = GC.app.terrainMap.getFactory();
 			var animator = GC.app.terrainMap.getAnimator();
 			
 			if(view.style.y > GC.app.upperLimit) {
+				animate(view).clear();
 				animate(view).now({y: GC.app.upperLimit});
 			}
 
-			if(view.style.x <= -view.style.width + GC.app.deviceWidth) {
+			if(view.style.x - factory.viewBlocksWidth <= -view.style.width) {
 				factory.generateBlocksOnTheRight();
 			}
 
-			if(view.style.x > 0) {
+			if(view.style.x + factory.viewBlocksHeight >= 0) {
 				factory.generateBlocksOnTheLeft();
 			}
 		});
