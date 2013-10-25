@@ -1,5 +1,6 @@
 //devkit imports
-import device;
+import device
+import ui.View as View;;
 import math.geom.Point as Point;
 
 //our imports;
@@ -21,12 +22,20 @@ exports = Class(GC.Application, function () {
 
     	this.blocksSize = new Point(this.deviceWidth/6, this.deviceWidth/6);
 		
-		this.style.backgroundColor = " #82CAFF";
+		this.superView = new View({
+			x: 0,
+            y: 0,
+			tag: 'super',
+			width: this.deviceWidth,
+			height: this.deviceHeight,
+			backgroundColor: "#82CAFF",
+            superview: this.view
+        });
 
 		this.terrainMap = new Terrain({
 			x: 0,
 			y: this.upperLimit,
-			superview: this.view, 
+			superview: this.superView, 
 			blocksSize: this.blocksSize,
 			deviceWidth: this.deviceWidth,
 			deviceHeight: this.deviceHeight
