@@ -31,11 +31,6 @@ exports = Class(GC.Application, function () {
 			deviceWidth: this.deviceWidth,
 			deviceHeight: this.deviceHeight
 		});
-
-		var view = GC.app.terrainMap.getTerrainView();
-		var factory = GC.app.terrainMap.getFactory();
-		var animator = GC.app.terrainMap.getAnimator();
-		factory.initBlocks(view);
 	};
 
 	this.launchUI = function () {};

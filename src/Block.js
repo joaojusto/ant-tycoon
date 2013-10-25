@@ -12,6 +12,7 @@ exports = new Class(ImageView, function(supr){
 		supr(this, "init", [merge(opts, blockOptions)]);
 
 		this.on("InputSelect", function () {
+			console.log("viewBlock = " + this.getSuperview().getTag());
 			console.log("clicked = " + this.style.x + ", " + this.style.y);
     	});
 	};

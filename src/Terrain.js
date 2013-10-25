@@ -17,12 +17,12 @@ exports = new Class(View, function(supr){
 		this.terrainView = new View({
 			x: opts.x,
             y: opts.y,
-			id: 'TerrainView',
-            superview: opts.superview,
-            width: opts.deviceWidth,
-            height: opts.deviceHeight
+			tag: 'TerrainView',
+            superview: opts.superview
         });
 
+		this.generated = false;
+		
 		this.animator = animate(this.terrainView);
 
 		drag.makeDraggable(this.terrainView, {
@@ -34,6 +34,25 @@ exports = new Class(View, function(supr){
   			var view = GC.app.terrainMap.getTerrainView();
 			var animator = GC.app.terrainMap.getAnimator();
 			animate(view).clear();
+			//console.log("pos: x= ", view.style.x, " y= ", view.style.y);
+		});
+
+		this.terrainView.on('DragStop', function (dragEvent, selectEvent) {
+  			var view = GC.app.terrainMap.getTerrainView();
+  			var factory = GC.app.terrainMap.getFactory();
+			var animator = GC.app.terrainMap.getAnimator();
+			
+			if(view.style.y > GC.app.upperLimit) {
+				animate(view).now({y: GC.app.upperLimit});
+			}
+
+			if(view.style.x <= -view.style.width + GC.app.deviceWidth) {
+				factory.generateBlocksOnTheRight();
+			}
+
+			if(view.style.x > 0) {
+				factory.generateBlocksOnTheLeft();
+			}
 		});
 
 		this.factory = new TerrainFactory({
@@ -44,26 +63,7 @@ exports = new Class(View, function(supr){
 			terrainView: this.terrainView
 		});
 
-		this.factory.initBlocks();
-
-		this.terrainView.tick = function (dt) {
-			var view = GC.app.terrainMap.getTerrainView();
-			var factory = GC.app.terrainMap.getFactory();
-			var animator = GC.app.terrainMap.getAnimator();
-  			
-  			if(view.style.y > GC.app.upperLimit) {
-				animate(view).now({y: GC.app.upperLimit});
-			}
-
-			if(view.style.x <= GC.app.blocksSize.x) {
-				factory.generateBlocksOnTheLeft({
-        			xi: -GC.app.deviceWidth,
-        			xf: 0,
-        			yi: factory.blocksSize.y,
-        			yf: factory.deviceHeight,
-        		});
-			}
-		};
+		this.factory.initViewBlocks();
 	};
 
 	this.clean = function () {
