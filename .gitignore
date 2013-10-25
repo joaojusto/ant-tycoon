@@ -1,4 +1,7 @@
 $ cat .gitignore
 
-sdk/
+sdk
 build/
+*.json~
+*.version
+*.gitignore~
