@@ -12,16 +12,12 @@ exports = new Class(View, function(supr){
 		
 		supr(this, "init", opts);
 
-		this.terrain = [];
-
 		this.terrainView = new View({
 			x: opts.x,
             y: opts.y,
 			tag: 'TerrainView',
             superview: opts.superview
         });
-
-		this.generated = false;
 		
 		this.animator = animate(this.terrainView);
 
@@ -40,13 +36,16 @@ exports = new Class(View, function(supr){
 				animate(view).now({y: GC.app.upperLimit});
 			}
 
-			if(view.style.x - factory.viewBlocksWidth <= -view.style.width) {
+			if((-view.style.x) + factory.deviceWidth >= 
+				view.style.width - factory.viewBlocksWidth) {
 				factory.generateBlocksOnTheRight();
 			}
 
-			if(view.style.x + factory.viewBlocksHeight >= 0) {
+			if(view.style.x >= -factory.viewBlocksWidth) {
 				factory.generateBlocksOnTheLeft();
 			}
+
+			factory.checkVisibility();
 		});
 
 		this.factory = new TerrainFactory({
