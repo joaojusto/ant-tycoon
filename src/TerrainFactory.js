@@ -3,7 +3,6 @@ import device;
 import ui.View as View;
 import math.geom.Rect as Rect;
 import math.geom.Point as Point;
-import ui.TextView as TextView;
 import math.geom.intersect as intersect;
 
 //our imports

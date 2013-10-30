@@ -4,6 +4,7 @@ import ui.View as View;
 import event.input.drag as drag;
 
 //our imports
+import .Ant as Ant;
 import .TerrainFactory as TerrainFactory;
 
 exports = new Class(View, function(supr){
