@@ -20,7 +20,7 @@ exports = Class(GC.Application, function () {
 
     	this.upperLimit = this.deviceHeight/3;
 
-    	this.blocksSize = new Point(this.deviceWidth/6, this.deviceWidth/6);
+    	this.blocksSize = new Point(this.deviceWidth/12, this.deviceWidth/12);
 
 		this.superView = new View({
 			x: 0,

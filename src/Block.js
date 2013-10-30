@@ -1,6 +1,9 @@
 //devkit imports
 import ui.ImageView as ImageView;
 
+//our imports
+import .Ant as Ant;
+
 exports = new Class(ImageView, function(supr){
 
 	this.init = function(opts) {
@@ -14,6 +17,12 @@ exports = new Class(ImageView, function(supr){
 		this.on("InputSelect", function () {
 			console.log("viewBlock = " + this.getSuperview().getTag());
 			console.log("clicked = " + this.style.x + ", " + this.style.y);
+
+			var ant = new Ant({
+				x:this.style.x,
+        		blocksSize:opts.blocksSize,
+		 		superview: this.getSuperview()
+		 	});
     	});
 	};
 	this.clean = function() {

@@ -4,7 +4,6 @@ import ui.View as View;
 import event.input.drag as drag;
 
 //our imports
-import .Ant as Ant;
 import .TerrainFactory as TerrainFactory;
 
 exports = new Class(View, function(supr){
@@ -20,6 +19,8 @@ exports = new Class(View, function(supr){
             superview: opts.superview
         });
 		
+		this.blocksSize = opts.blocksSize;
+
 		this.animator = animate(this.terrainView);
 
 		drag.makeDraggable(this.terrainView, {
