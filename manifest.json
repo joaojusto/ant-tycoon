@@ -8,7 +8,7 @@
 		"stagingDomain": "com.ultimaideia.antTycoon"
 	},
 	"supportedOrientations": [
-		"portrait"
+		"landscape"
 	],
 	"description": "",
 	"icon": "resources/icons/icon512.png",
